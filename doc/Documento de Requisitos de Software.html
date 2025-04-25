@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Documento de Requisitos de Software</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 40px;
+      background: white;
+      color: black;
+    }
+    h1, h2, h3, h4 {
+      color: #222;
+      margin-top: 2em;
+    }
+    table {
+      width: 100%;
+      margin-top: 1em;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    ul, ol {
+      padding-left: 20px;
+    }
+    .meta {
+      margin-top: 3em;
+      font-size: 0.9em;
+    }
+  
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      table, th, td {
+        border: 1px solid #000 !important;
+      }
+      th {
+        background-color: #eee !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      td, th {
+        padding: 8px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Documento de Requisitos de Software</h1>
+  <h2>1. Introdução</h2>
+  <h3>1.1 Objetivo do Documento</h3>
+  <p>
+    Este documento especifica os requisitos funcionais, não funcionais e regras de negócio para o sistema de controle de estoque do Pub Skyna Bar, baseado na norma ISO/IEC/IEEE 29148:2018 (versão simplificada). Ele servirá como base para o desenvolvimento, validação e manutenção do sistema.
+  </p>
+  <h3>1.2 Materiais de Referência</h3>
+  <ul>
+    <li>ISO/IEC/IEEE 29148:2018 - Requisitos de software e sistemas (Seções 5 a 8)</li>
+    <li>Notas da entrevista com o gestor do Pub Skyna Bar, 24/04/2025</li>
+  </ul>
+
+  <h2>2. Descrição Geral do Sistema</h2>
+  <h3>2.1 Propósito do Sistema</h3>
+  <p>
+    O sistema tem como propósito permitir o controle de estoque em tempo real, focando em simplicidade e acessibilidade mobile. Ele deve oferecer funcionalidades de registro de movimentações, gestão automatizada de reposição e controle de acesso baseado em perfil.
+  </p>
+  <h3>2.2 Escopo</h3>
+  <strong>Inclui:</strong>
+  <ul>
+    <li>Módulo de cadastro de produtos</li>
+    <li>Controle de entradas/saídas</li>
+    <li>Geração de lista de compras</li>
+    <li>Histórico de operações</li>
+  </ul>
+  <strong>Exclui:</strong>
+  <ul>
+    <li>Integração com sistemas fiscais</li>
+    <li>Controle financeiro</li>
+    <li>Gestão de pedidos de venda</li>
+  </ul>
+
+  <h2>3. Requisitos Específicos</h2>
+  <h3>3.1 Requisitos Funcionais</h3>
+  <table>
+    <tr><th>ID</th><th>Descrição</th><th>Prioridade</th></tr>
+    <tr><td>RF01</td><td>Quando autenticado como Gestor, o sistema deve permitir o cadastro de produtos informando nome, unidade, quantidade atual e meta semanal.</td><td>Alta</td></tr>
+    <tr><td>RF02</td><td>O sistema deve registrar retiradas de produtos, com dados de produto, quantidade, usuário responsável e timestamp.</td><td>Alta</td></tr>
+    <tr><td>RF03</td><td>O sistema deve gerar automaticamente uma lista de compras com base na comparação entre estoque atual e meta semanal.</td><td>Alta</td></tr>
+    <tr><td>RF04</td><td>O sistema deve permitir ao Gestor estornar retiradas incorretas, mantendo o registro no histórico.</td><td>Média</td></tr>
+  </table>
+
+  <h3>3.2 Requisitos Não-Funcionais</h3>
+  <table>
+    <tr><th>ID</th><th>Categoria</th><th>Descrição</th></tr>
+    <tr><td>RNF01</td><td>Usabilidade</td><td>A interface deve seguir diretrizes responsivas e acessíveis, permitindo uso intuitivo.</td></tr>
+    <tr><td>RNF02</td><td>Segurança</td><td>O sistema deve exigir autenticação individual por usuário antes do uso de qualquer funcionalidade.</td></tr>
+  </table>
+
+  <h3>3.3 Regras de Negócio</h3>
+  <table>
+    <tr><th>ID</th><th>Descrição</th></tr>
+    <tr><td>RN01</td><td>Apenas usuários com perfil "Gestor" podem definir metas semanais.</td></tr>
+    <tr><td>RN02</td><td>Apenas usuários com perfil "Gestor" podem estornar a saída de um produto.</td></tr>
+    <tr><td>RN03</td><td>Apenas usuários com perfil "Gestor" podem cadastrar novos produtos.</td></tr>
+    <tr><td>RN04</td><td>A lista de compras deve ser gerada com base na fórmula: (meta semanal - estoque atual).</td></tr>
+    <tr><td>RN05</td><td>Apenas usuários com perfil "Gestor" podem visualizar o histórico de movimentações de estoque.</td></tr>
+  </table>
+
+  <h2>4. Restrições</h2>
+  <ol>
+    <li>Plataforma primária: Web com design mobile-first</li>
+    <li>Servidor baseado em sistema Linux</li>
+  </ol>
+
+  <div class="meta">
+    <p><strong>Versão:</strong> 1.0</p>
+    <p><strong>Data:</strong> 24/05/2025</p>
+    <p><strong>Autor:</strong> Marco Aurélio Duarte Bezerra</p>
+    <p><strong>Aprovado por:</strong> Braian Matheus Rodrigues Silva</p>
+  </div>
+</body>
+</html>
