@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Documento de Entrevista de Requisitos</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      margin: 40px;
+      max-width: 800px;
+      color: #000;
+      background: #fff;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24pt;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 18pt;
+      margin-top: 40px;
+    }
+
+    p {
+      text-align: justify;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      margin-bottom: 5px;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .qa {
+      margin-top: 20px;
+    }
+
+    .question {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .answer {
+      margin-left: 20px;
+      font-style: italic;
+    }
+
+    @media print {
+      body {
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Documento de Entrevista de Requisitos</h1>
+
+  <div class="section">
+    <h2>Informações Básicas</h2>
+    <ul>
+      <li><strong>Entrevistado:</strong> Braian Matheus Rodrigues Silva</li>
+      <li><strong>Entrevistador:</strong> Marco Aurélio Duarte Bezerra</li>
+      <li><strong>Data:</strong> 24/04/2025</li>
+      <li><strong>Objetivo:</strong> Levantar requisitos para sistema de controle de estoque</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>1. Contexto Geral</h2>
+
+    <div class="qa">
+      <div class="question">Pergunta 1.1:</div>
+      <p>"Qual o principal problema que você acredita que um sistema poderia resolver no bar?"</p>
+      <div class="answer">
+        "Estamos com um problema no controle de estoque. Acontece que pagamos um software, mas ele é complexo demais,
+        então voltamos a usar papel, usamos apenas a tela de pedido dele. Usar controle de estoque no papel causa erros,
+        produtos acabam sem aviso, já tivemos perdas e nunca temos um registro de quem tirou ou a hora que fez isso. Se
+        puder fazer algo simples pra isso. Acho que esse é o maior problema atualmente."
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">Pergunta 1.2:</div>
+      <p>"Como você imagina um sistema ideal para o estoque do bar?"</p>
+      <div class="answer">
+        "Precisava de algo que mostrasse tudo que tem no estoque e que desse pra anotar pelo celular quando usamos algo,
+        porque todos os funcionários atendem as mesas ao mesmo tempo. Precisava que avisasse o que precisa comprar,
+        porque todas as segundas reabastecemos para a semana. Se puder, mostrasse quem mexeu no estoque, além da hora
+        que mexeu, temos câmeras, e isso ajudaria a gente incluir esse processo, porque o sistema atual até mostra as
+        movimentações no estoque, mas não mostra horário e nem quem fez, então até as câmeras ficam inúteis.
+        Principalmente, que não fosse complicado igual o sistema atual. Tem como dividir as tarefas? Tipo eu definir pra
+        eu controlar quem pode criar produto ou não, quem pode ver a determinadas coisas? Se sim seria muito bom."
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. Explorando Requisitos</h2>
+
+    <div class="qa">
+      <div class="question">Pergunta 2.1:</div>
+      <p>"Quais tipos de produtos vocês controlam no estoque? Pode me dar exemplos?"</p>
+      <div class="answer">
+        "A gente tem bebidas alcoólicas (vinho, cerveja, vodka), refrigerantes, gelo, frutas pra drinks, carnes,
+        petiscos e algumas coisas de limpeza. As bebidas são mais importantes, mas as frutas também acabam rápido. Cada
+        coisa tem uma unidade diferente, então não dá pra contar tudo igual."
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">Pergunta 2.2:</div>
+      <p>"Você mencionou 'anotar pelo celular'. Como seria esse registro?"</p>
+      <div class="answer">
+        "Quando um funcionário pegar 3 latas de refrigerante, por exemplo, ele abre o app, seleciona o produto e
+        registra a saída. O sistema já atualiza o estoque. Quero acompanhar como está a saída."
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">Pergunta 2.3:</div>
+      <p>"Sobre controlar quem pode criar produto, quem teria essa permissão?"</p>
+      <div class="answer">
+        "Só gestor. Coisas que só gestores podem fazer são adicionar novos produtos; Ajustar a meta de consumo da
+        semana, como eu falei, as segundas faço as compras; Os funcionários registram a saída e repoem de acordo com as
+        compras que faço. Mas como está em papel, fica complicado controlar isso."
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">Pergunta 2.4:</div>
+      <p>"Você falou de uma quantidade semanal que você define, e você faz compras com base nessa meta? Como funciona
+        esse cálculo seu?"</p>
+      <div class="answer">
+        "Se eu defino que usamos 10 garrafas de vinho por semana, e já foram registradas 8 saídas, então na lista de
+        compras eu coloco que tenho que repor 8 para completar as 10. Se eu entender que tenho que aumentar esse
+        quantidade, sei lá, aumentei para 14 a quantidade semanal logo antes de ir na loja, então eu coloco na lista de
+        compras que preciso comprar 12, porque ainda tem duas."
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">Pergunta 2.5:</div>
+      <p>"E se alguém registrar uma saída errada, como você quer que o sistema lide?"</p>
+      <div class="answer">
+        "Tem que ter como reverter, tipo um desfazer. E isso fica registrado no histórico e somente gestor pode
+        reverter. Se tiver como, é claro."
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
