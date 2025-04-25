@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Especificação de Casos de Uso - Sistema de Controle de Estoque</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 40px;
+      color: #222;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 60px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 4px;
+    }
+
+    .caso {
+      margin-bottom: 40px;
+    }
+
+    .bloco {
+      margin: 10px 0;
+    }
+
+    .titulo {
+      font-weight: bold;
+      color: #444;
+    }
+
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Especificação de Casos de Uso</h1>
+  <h2>Sistema de Controle de Estoque</h2>
+
+  <div class="caso">
+    <div class="bloco"><span class="titulo">Identificador:</span> UC01</div>
+    <div class="bloco"><span class="titulo">Nome:</span> Cadastrar Produto</div>
+    <div class="bloco"><span class="titulo">Ator Principal:</span> Gestor</div>
+    <div class="bloco"><span class="titulo">Objetivo:</span> Adicionar um novo produto no sistema com metas semanais.
+    </div>
+    <div class="bloco"><span class="titulo">Gatilho:</span> Gestor acessa o menu de cadastro de produtos.</div>
+    <div class="bloco"><span class="titulo">Pré-condições:</span> Usuário autenticado como gestor.</div>
+    <div class="bloco"><span class="titulo">Pós-condições:</span> Produto cadastrado e visível no estoque.</div>
+    <div class="bloco"><span class="titulo">Fluxo Principal:</span>
+      <ol>
+        <li>Gestor acessa o menu de cadastro.</li>
+        <li>Preenche nome, unidade, quantidade inicial e meta semanal.</li>
+        <li>Confirma o cadastro.</li>
+        <li>Sistema salva o produto e exibe confirmação.</li>
+      </ol>
+    </div>
+    <div class="bloco"><span class="titulo">Fluxo Alternativo:</span> Produto com nome já existente → Sistema exibe erro
+      e solicita novo nome.</div>
+    <div class="bloco"><span class="titulo">Regras de Negócio:</span> RN03</div>
+  </div>
+
+  <div class="caso">
+    <div class="bloco"><span class="titulo">Identificador:</span> UC02</div>
+    <div class="bloco"><span class="titulo">Nome:</span> Registrar Retirada de Produto</div>
+    <div class="bloco"><span class="titulo">Atores:</span> Funcionário, Gestor</div>
+    <div class="bloco"><span class="titulo">Objetivo:</span> Registrar saída de item do estoque com rastreabilidade.
+    </div>
+    <div class="bloco"><span class="titulo">Gatilho:</span> Usuário precisa retirar item do estoque.</div>
+    <div class="bloco"><span class="titulo">Pré-condições:</span> Produto existente e usuário autenticado.</div>
+    <div class="bloco"><span class="titulo">Pós-condições:</span> Estoque atualizado e registro salvo.</div>
+    <div class="bloco"><span class="titulo">Fluxo Principal:</span>
+      <ol>
+        <li>Usuário acessa módulo de retirada.</li>
+        <li>Seleciona produto e informa quantidade.</li>
+        <li>Confirma a retirada.</li>
+        <li>Sistema registra a operação com data, hora e usuário.</li>
+      </ol>
+    </div>
+    <div class="bloco"><span class="titulo">Fluxo de Exceção:</span> Quantidade maior que estoque → Sistema exibe erro e
+      bloqueia retirada.</div>
+    <div class="bloco"><span class="titulo">Regras de Negócio:</span> RF02</div>
+  </div>
+
+  <div class="caso">
+    <div class="bloco"><span class="titulo">Identificador:</span> UC03</div>
+    <div class="bloco"><span class="titulo">Nome:</span> Estornar Retirada</div>
+    <div class="bloco"><span class="titulo">Ator Principal:</span> Gestor</div>
+    <div class="bloco"><span class="titulo">Objetivo:</span> Corrigir erros em retiradas registradas.</div>
+    <div class="bloco"><span class="titulo">Gatilho:</span> Gestor identifica erro em uma retirada.</div>
+    <div class="bloco"><span class="titulo">Pré-condições:</span> Retirada existente e usuário autenticado como gestor.
+    </div>
+    <div class="bloco"><span class="titulo">Pós-condições:</span> Estoque ajustado e estorno registrado.</div>
+    <div class="bloco"><span class="titulo">Fluxo Principal:</span>
+      <ol>
+        <li>Gestor acessa histórico de movimentações.</li>
+        <li>Localiza a retirada incorreta.</li>
+        <li>Solicita estorno.</li>
+        <li>Sistema atualiza o estoque e salva o estorno.</li>
+      </ol>
+    </div>
+    <div class="bloco"><span class="titulo">Regras de Negócio:</span> RN02</div>
+  </div>
+
+  <div class="caso">
+    <div class="bloco"><span class="titulo">Identificador:</span> UC04</div>
+    <div class="bloco"><span class="titulo">Nome:</span> Definir Meta Semanal</div>
+    <div class="bloco"><span class="titulo">Ator Principal:</span> Gestor</div>
+    <div class="bloco"><span class="titulo">Objetivo:</span> Ajustar metas semanais de consumo por produto.</div>
+    <div class="bloco"><span class="titulo">Gatilho:</span> Início de semana ou necessidade de ajuste.</div>
+    <div class="bloco"><span class="titulo">Pré-condições:</span> Produto existente e gestor autenticado.</div>
+    <div class="bloco"><span class="titulo">Pós-condições:</span> Meta atualizada para uso na lista de compras.</div>
+    <div class="bloco"><span class="titulo">Fluxo Principal:</span>
+      <ol>
+        <li>Gestor acessa seção de metas.</li>
+        <li>Seleciona produto.</li>
+        <li>Informa nova meta.</li>
+        <li>Sistema salva e atualiza os cálculos.</li>
+      </ol>
+    </div>
+    <div class="bloco"><span class="titulo">Regras de Negócio:</span> RN01</div>
+  </div>
+
+  <div class="caso">
+    <div class="bloco"><span class="titulo">Identificador:</span> UC05</div>
+    <div class="bloco"><span class="titulo">Nome:</span> Visualizar Lista de Compras</div>
+    <div class="bloco"><span class="titulo">Ator Principal:</span> Gestor</div>
+    <div class="bloco"><span class="titulo">Objetivo:</span> Obter lista de produtos a serem comprados.</div>
+    <div class="bloco"><span class="titulo">Gatilho:</span> Preparação para reabastecimento semanal.</div>
+    <div class="bloco"><span class="titulo">Pré-condições:</span>  Gestor autenticado, produtos e metas cadastrados.</div>
+    <div class="bloco"><span class="titulo">Pós-condições:</span> Lista exibida com produtos e quantidades.</div>
+    <div class="bloco"><span class="titulo">Fluxo Principal:</span>
+      <ol>
+        <li>Gestor acessa seção de lista de compras.</li>
+        <li>Sistema calcula: meta semanal - estoque atual.</li>
+        <li>Exibe lista com produtos a comprar.</li>
+      </ol>
+    </div>
+    <div class="bloco"><span class="titulo">Regras de Negócio:</span> RN04</div>
+  </div>
+
+  <div class="caso">
+    <div class="bloco"><span class="titulo">Identificador:</span> UC06</div>
+    <div class="bloco"><span class="titulo">Nome:</span> Visualizar Estoque</div>
+    <div class="bloco"><span class="titulo">Atores:</span> Funcionário, Gestor</div>
+    <div class="bloco"><span class="titulo">Objetivo:</span> Consultar a situação atual do estoque.</div>
+    <div class="bloco"><span class="titulo">Gatilho:</span> Usuário deseja verificar o inventário.</div>
+    <div class="bloco"><span class="titulo">Pré-condições:</span> Usuário autenticado.</div>
+    <div class="bloco"><span class="titulo">Pós-condições:</span> Nenhuma alteração no sistema.</div>
+    <div class="bloco"><span class="titulo">Fluxo Principal:</span>
+      <ol>
+        <li>Usuário acessa menu de estoque.</li>
+        <li>Sistema exibe lista com todos os produtos e quantidades.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="caso">
+    <div class="bloco"><span class="titulo">Identificador:</span> UC07</div>
+    <div class="bloco"><span class="titulo">Nome:</span> Visualizar Histórico de Movimentações</div>
+    <div class="bloco"><span class="titulo">Ator Principal:</span> Gestor</div>
+    <div class="bloco"><span class="titulo">Objetivo:</span> Consultar histórico de retiradas e estornos.</div>
+    <div class="bloco"><span class="titulo">Gatilho:</span> Verificação de movimentações.</div>
+    <div class="bloco"><span class="titulo">Pré-condições:</span>  Gestor autenticado e movimentações registradas.</div>
+    <div class="bloco"><span class="titulo">Pós-condições:</span> Nenhuma alteração no sistema.</div>
+    <div class="bloco"><span class="titulo">Fluxo Principal:</span>
+      <ol>
+        <li>Gestor acessa menu de histórico.</li>
+        <li>Sistema exibe todas as movimentações com data, hora, usuário, tipo e quantidade.</li>
+      </ol>
+    </div>
+    <div class="bloco"><span class="titulo">Regras de Negócio:</span> RN05</div>
+  </div>
+
+</body>
+
+</html>
