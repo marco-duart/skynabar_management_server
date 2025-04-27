@@ -5,6 +5,7 @@ class CreateStockMovements < ActiveRecord::Migration[8.0]
       t.belongs_to :user, null: false, foreign_key: true
       t.decimal :quantity
       t.integer :movement_type
+      t.string :notes
 
       t.timestamps
     end

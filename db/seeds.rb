@@ -67,6 +67,7 @@ products = Product.all
       user: users.sample,
       quantity: quantity,
       movement_type: movement_type,
+      notes: Faker::Lorem.paragraph,
       created_at: Faker::Time.between(from: 3.months.ago, to: Time.now)
     )
 

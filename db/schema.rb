@@ -40,6 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_26_152658) do
     t.bigint "user_id", null: false
     t.decimal "quantity"
     t.integer "movement_type"
+    t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_stock_movements_on_product_id"
