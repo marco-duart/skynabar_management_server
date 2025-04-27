@@ -15,7 +15,8 @@ module StockOperations
           product: @product,
           user: @user,
           quantity: @quantity,
-          movement_type: :input
+          movement_type: :input,
+          notes: "Estoque reabastecido por #{@user.name} para #{@quantity}."
         )
       end
 

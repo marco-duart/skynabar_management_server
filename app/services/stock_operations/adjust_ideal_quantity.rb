@@ -19,7 +19,7 @@ module StockOperations
             user: @user,
             quantity: @new_quantity,
             movement_type: :adjustment,
-            notes: "Ajuste de quantidade semanal de #{old_quantity} para #{@new_quantity}"
+            notes: "Ajuste de quantidade semanal de #{old_quantity} para #{@new_quantity}."
           )
         end
       end
