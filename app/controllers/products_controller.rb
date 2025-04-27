@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [ :show, :update, :update_ideal_quantity ]
+  before_action :set_product, only: [ :show, :update, :update_ideal_quantity, :withdraw_from_stock, :restock, :reverse_withdrawal ]
 
   def index
     authorize Product
@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
 
   def update
     authorize @product
-    if @product.update(product_params)
+    if @product.update(update_product_params)
       render json: @product
     else
       render json: @product.errors, status: :unprocessable_entity
@@ -50,12 +50,51 @@ class ProductsController < ApplicationController
     }
   end
 
-  def update_ideal_quantity
-    authorize @product
-    if @product.update(ideal_quantity: params[:ideal_quantity])
-      render json: @product
+  def withdraw_from_stock
+    authorize @product, :withdraw_from_stock?
+
+    result = StockOperations::Withdraw.new(@product, current_user, params[:quantity]).call
+
+    if result[:success]
+      render json: result[:product]
     else
-      render json: @product.errors, status: :unprocessable_entity
+      render json: { error: result[:error] }, status: :unprocessable_entity
+    end
+  end
+
+  def update_ideal_quantity
+    authorize @product, :update_ideal_quantity?
+
+    result = StockOperations::AdjustIdealQuantity.new(@product, current_user, params[:ideal_quantity]).call
+
+    if result[:success]
+      render json: result[:product]
+    else
+      render json: { error: result[:error] }, status: :unprocessable_entity
+    end
+  end
+
+  def reverse_withdrawal
+    authorize @product, :reverse_withdrawal?
+
+    result = StockOperations::ReverseWithdrawal.new(@product, current_user, params[:quantity]).call
+
+    if result[:success]
+      render json: result[:product]
+    else
+      render json: { error: result[:error] }, status: :unprocessable_entity
+    end
+  end
+
+  def restock
+    authorize @product, :restock?
+
+    result = StockOperations::Restock.new(@product, current_user, params[:quantity]).call
+
+    if result[:success]
+      render json: result[:product]
+    else
+      render json: { error: result[:error] }, status: :unprocessable_entity
     end
   end
 
@@ -67,5 +106,9 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :sku, :current_quantity, :ideal_quantity, :unit_type, :product_category_id)
+  end
+
+  def update_product_params
+    params.require(:product).permit(:name, :sku, :unit_type, :product_category_id)
   end
 end

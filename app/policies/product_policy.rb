@@ -28,4 +28,16 @@ class ProductPolicy < ApplicationPolicy
   def update_ideal_quantity?
     user.manager?
   end
+
+  def withdraw_from_stock?
+    true
+  end
+
+  def restock?
+    true
+  end
+
+  def reverse_withdrawal?
+    user.manager?
+  end
 end
