@@ -4,13 +4,14 @@ Rails.application.routes.draw do
   }
 
   resources :product_categories, only: [ :index, :show, :create, :update, :destroy ]
+  resources :stock_movements, only: [ :index, :show ]
   resources :products do
-    collection do
-      get :shopping_list
-    end
-    member do
-      patch :update_ideal_quantity
-    end
+    get :shopping_list, on: :collection
+
+    patch :update_ideal_quantity, on: :member
+    patch :withdraw_from_stock, on: :member
+    patch :reverse_withdrawal, on: :member
+    patch :restock, on: :member
   end
   resources :stock_movements, only: [ :index, :create ]
 end
