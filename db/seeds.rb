@@ -45,7 +45,7 @@ puts "Criando produtos..."
   )
 end
 
-puts "Criando movimentações históricas..."
+puts "Criando histórico de movimentações..."
 users = User.all
 products = Product.all
 
