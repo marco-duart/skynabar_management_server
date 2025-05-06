@@ -13,7 +13,7 @@ class ProductCategoriesController < ApplicationController
   end
 
   def create
-    @product_category = ProductCategory.new(product_params)
+    @product_category = ProductCategory.new(product_category_params)
     authorize @product_category
     if @product_category.save
       render json: @product_category, status: :created
@@ -24,7 +24,7 @@ class ProductCategoriesController < ApplicationController
 
   def update
     authorize @product_category
-    if @product_category.update(product_params)
+    if @product_category.update(product_category_params)
       render json: @product_category
     else
       render json: @product_category.errors, status: :unprocessable_entity
