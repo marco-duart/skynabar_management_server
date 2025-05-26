@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     registrations: "registrations"
   }
 
+  devise_scope :user do
+    get "me", to: "users#me"
+  end
+
   resources :product_categories, only: [ :index, :show, :create, :update, :destroy ]
   resources :stock_movements, only: [ :index, :show ]
   resources :products do
