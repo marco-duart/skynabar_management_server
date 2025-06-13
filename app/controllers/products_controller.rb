@@ -4,7 +4,9 @@ class ProductsController < ApplicationController
 
   def index
     authorize Product
-    @products = policy_scope(Product)
+    @q = policy_scope(Product).ransack(params[:q])
+    @products = @q.result
+
     render json: @products
   end
 
