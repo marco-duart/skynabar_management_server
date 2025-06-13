@@ -3,7 +3,7 @@ class ProductCategoriesController < ApplicationController
   before_action :set_product_category, only: [ :show, :update ]
 
   def index
-    @product_categories = policy_scope(Product)
+    @product_categories = policy_scope(ProductCategory)
     render json: @product_categories
   end
 
