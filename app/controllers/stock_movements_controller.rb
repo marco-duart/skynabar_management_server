@@ -13,6 +13,12 @@ class StockMovementsController < ApplicationController
     render json: @stock_movement
   end
 
+  def inventory_report
+    authorize StockMovement
+    report = StockOperations::InventoryReport.new(current_user).call
+    render json: report
+  end
+
   private
 
   def set_stock_movement
