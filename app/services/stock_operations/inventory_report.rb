@@ -29,22 +29,9 @@ module StockOperations
           movement_type: movement.movement_type,
           notes: movement.notes,
           created_at: movement.created_at,
-          product: {
-            id: movement.product.id,
-            name: movement.product.name,
-            sku: movement.product.sku,
-            current_quantity: movement.product.current_quantity,
-            ideal_quantity: movement.product.ideal_quantity,
-            restock_percentage: movement.product.restock_percentage,
-            unit_type: movement.product.unit_type,
-            category: movement.product.product_category&.name
-          },
-          user: {
-            id: movement.user.id,
-            name: movement.user.name,
-            role: movement.user.role,
-            email: movement.user.email
-          }
+          updated_at: movement.updated_at,
+          product: movement.product,
+          user: movement.user
         }
       end
     end
@@ -71,17 +58,6 @@ module StockOperations
              .select { |p| p.current_quantity < p.ideal_quantity }
              .sort_by { |p| p.current_quantity / p.ideal_quantity }
              .take(5)
-             .map do |product|
-        {
-          id: product.id,
-          name: product.name,
-          current_quantity: product.current_quantity,
-          ideal_quantity: product.ideal_quantity,
-          restock_percentage: product.restock_percentage,
-          quantity_to_buy: product.quantity_to_buy,
-          unit_type: product.unit_type
-        }
-      end
     end
 
     def movement_stats
