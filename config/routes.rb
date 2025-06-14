@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   end
 
   resources :product_categories, only: [ :index, :show, :create, :update, :destroy ]
-  resources :stock_movements, only: [ :index, :show ]
   resources :products do
     get :shopping_list, on: :collection
 
@@ -17,5 +16,9 @@ Rails.application.routes.draw do
     patch :reverse_withdrawal, on: :member
     patch :restock, on: :member
   end
-  resources :stock_movements, only: [ :index, :create ]
+  resources :stock_movements, only: [ :index, :show ] do
+    collection do
+      get :inventory_report
+    end
+  end
 end
