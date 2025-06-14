@@ -16,4 +16,8 @@ class StockMovementPolicy < ApplicationPolicy
   def show?
     user.manager?
   end
+
+  def inventory_report?
+    user.manager?
+  end
 end
